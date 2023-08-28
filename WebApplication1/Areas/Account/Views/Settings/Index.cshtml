@@ -1,0 +1,116 @@
+﻿@model UserSettingsViewModel
+@{
+    ViewBag.Title = "Настройки аккаунта";
+}
+@await Html.PartialAsync("../Item/PartialsMaterial/_Menu", "Настройки аккаунта")
+
+<section class="section section-md bg-default" style="padding: 0px !important;">
+    <div class="container-fluid grid-demo grid-demo-bordered">
+        <div class="row">
+            <div class="col-12">
+                <h6>Приглашения пользователей</h6>
+                <div class="table-custom-responsive">
+                    <table class="table-custom table-custom-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ссылка</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.MemberShipStatisticsViewModel.InvitationsListViewModel.Invitations)
+                            {
+                                <tr>
+                                    <td>@item.Href</td>
+                                    @{
+                                        if (item.IsUsed)
+                                        {
+                                            <td>Использовано</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Не использовано</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <p>&nbsp;&nbsp;&nbsp;Страница: @Model.MemberShipStatisticsViewModel.InvitationsListViewModel.PageViewModel.PageNumber</p>
+                    <div class="group-xl">
+                    @if (Model.MemberShipStatisticsViewModel.InvitationsListViewModel.PageViewModel.HasPreviousPage)
+                    {
+                        <a asp-action="Index"
+                       asp-route-page="@(Model.MemberShipStatisticsViewModel.InvitationsListViewModel.PageViewModel.PageNumber - 1)"
+                       class="button button-primary">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Назад
+                        </a>
+                    }
+                    @if (Model.MemberShipStatisticsViewModel.InvitationsListViewModel.PageViewModel.HasNextPage)
+                    {
+                        <a asp-action="Index"
+                       asp-route-page="@(Model.MemberShipStatisticsViewModel.InvitationsListViewModel.PageViewModel.PageNumber + 1)"
+                       class="button button-primary">
+                            Вперед
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </a>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <h6>Статистика приглашений</h6>
+                @await Html.PartialAsync("_MemberShipDiagram", @Model.MemberShipStatisticsViewModel)
+            </div>
+            <div class="col-4">
+                <h6>Генерация приглашения</h6>
+                <form asp-action="GenerateInvitation" class="rd-form rd-form-centered"
+                      data-ajax-loading="#loading" data-ajax-mode="replace"
+                      data-ajax-update="#updateDiv" data-ajax-success="Success" data-ajax-failure="Failure" data-ajax="true">
+                    <div id="updateDiv"></div>
+                    @Html.AntiForgeryToken()
+                    <input class="button button-block button-primary" type="submit" value="Сгенерировать" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h6>Личные данные</h6>
+                <form asp-action="Index" class="rd-form rd-form-centered">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-wrap">
+                        <label asp-for="Name" class="form-label rd-input-label"></label>
+                        <input asp-for="Name" class="form-input form-control-last-child" value="@Model?.Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Email" class="form-label rd-input-label"></label>
+                        <input asp-for="Email" class="form-input" value="@Model?.Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Password" class="form-label rd-input-label"></label>
+                        <input asp-for="Password" class="form-input" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="PasswordConfirm" class="form-label rd-input-label"></label>
+                        <input asp-for="PasswordConfirm" class="form-input" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Изменить" class="button button-block button-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"></script>

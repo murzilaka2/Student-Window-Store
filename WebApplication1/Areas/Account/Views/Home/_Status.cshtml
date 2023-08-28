@@ -1,0 +1,15 @@
+﻿<div class="row justify-content-center">
+    <div class="col-xl-10">
+        <div class="tabs-custom tabs-horizontal tabs-corporate" style="text-align: center !important;">
+            <ul>
+                <li class="nav-item"><a class="nav-link" href="/account/Home/">Все</a></li>
+               @foreach(var item in Html.GetEnumSelectList(typeof(OrderStatus)))
+                {
+                    <li class="nav-item"><a class="nav-link" href="/account/Home/?orderstatus=@item.Value">@item.Text</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<hr/>
+<br />

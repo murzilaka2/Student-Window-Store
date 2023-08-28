@@ -1,0 +1,141 @@
+﻿@model WindowViewModel
+@{
+    ViewBag.Title = @Model.Window.Name;
+}
+
+<section class="breadcrumbs-custom bg-image" style="background-image: url(../images/breadcrumbs-bg.png);" data-preset="{&quot;title&quot;:&quot;Breadcrumbs&quot;,&quot;category&quot;:&quot;header&quot;,&quot;reload&quot;:false,&quot;id&quot;:&quot;breadcrumbs&quot;}">
+    <div class="container">
+        <div class="row row-20 align-items-center">
+            <div class="col-sm-6">
+                <h5 class="breadcrumbs-custom-title">@Model.Window.Name</h5>
+            </div>
+            <div class="col-sm-6 text-sm-right">
+                <ul class="breadcrumbs-custom-path">
+                    <li>Маршрут:</li>
+                    <li><a href="/Windows/Index">Все окна</a></li>
+                    <li class="active">@Model.Window.Name</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-xl-12">
+                <div class="post-creative post-creative-single">
+                    <div class="post-creative-social">
+                        <a class="post-creative-date" href="single-post.html">
+                            <span class="date">@DateTime.Now.Day</span>
+                            <span class="month">@DateTime.Now.ToString("MMMM")</span>
+                        </a>
+                        <ul class="post-creative-soc-list">
+                            <li><a class="nc-icon-mini social_logo-fb-simple" href="#"></a></li>
+                            <li><a class="nc-icon-mini social_logo-twitter" href="#"></a></li>
+                            <li><a class="nc-icon-mini social_logo-google-plus" href="#"></a></li>
+                            <li><a class="nc-icon-mini social_logo-linkedin" href="#"></a></li>
+                            <li><a class="nc-icon-mini social_logo-pinterest" href="#"></a></li>
+                        </ul>
+                    </div>
+                    <div class="post-creative-inner">
+                        <div class="post-classic-figure">
+                            <img src="@Model.Window.Image" class="img-thumbnail" style="height: 300px;width: 300px;" />
+                        </div>
+                        <ul class="post-classic-tags">
+                            <li>Категория: </li>
+                            <li><a class="post-classic-author" href="/Windows/Index/@Model.Window.Category.CategoryName">@Model.Window.Category.CategoryName</a></li>
+                            <br />
+                            <li>Остаток: </li>
+                            <li>@Model.Window.Available</li>
+                            <br />
+                            <li>Избраный товар: </li>
+                            <li>
+                                @if (Model.Window.IsFavorite)
+                                {
+                                    <span>Да</span>
+                                }
+                                else
+                                {
+                                    <span>Нет</span>
+                                }
+                            </li>
+                        </ul>
+
+                        <div class="post-creative-single-body">
+                            <p>@Model.Window.LongDescription</p>
+                        </div>
+                        <a class="button button-secondary button-block" href="/ShopCart/AddToCart/@Model.Window.Id">Добавить в корзину</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="row row-50" style="padding-top: 15px;">
+                        <div class="col-lg-10 col-xl-8">
+                            <h5>Отзывы</h5>
+                            @if (@Model.Window.FeedBacks.Where(e => e.IsAccepted).Count() == 0)
+                            {
+                                <blockquote class="blockqoute-classic">
+                                    <p>Отзывов нет. Оставьте ваш первый отзыв о товаре!</p>
+                                </blockquote>
+                            }
+                            else
+                            {
+                                @foreach (var item in @Model.Window.FeedBacks.Where(e => e.IsAccepted))
+                                {
+                                    <blockquote class="blockqoute-classic">
+                                        <p>@item.Comment</p>
+                                        <cite>@item.Name</cite>
+                                    </blockquote>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="post-comment-form" id="updateDiv">
+                    <br />
+                    <h5>Оставьте отзыв</h5>
+                    <p>Ваш адрес электронной почты не будет опубликован. Обязательные поля отмечены *</p>
+                    <form class="rd-mailform text-left" asp-area="" asp-controller="Windows" asp-action="FeedBack" data-ajax-update="#updateDiv" data-ajax="true">
+                        <input type="hidden" name="WindowId" value="@Model.Window.Id" />
+                        <div class="row row-20 gutters-10">
+                            <div class="col-lg-4">
+                                <div class="form-wrap">
+                                    <label asp-for="FeedBackModel.Name" class="form-label rd-input-label"></label>
+                                    <input asp-for="FeedBackModel.Name" class="form-input" />
+                                    <span asp-validation-for="FeedBackModel.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-wrap">
+                                    <label asp-for="FeedBackModel.Email" class="form-label rd-input-label"></label>
+                                    <input asp-for="FeedBackModel.Email" class="form-input" />
+                                    <span asp-validation-for="FeedBackModel.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-wrap">
+                                    <label asp-for="FeedBackModel.Comment" class="form-label rd-input-label"></label>
+                                    <textarea asp-for="FeedBackModel.Comment" class="form-input"></textarea>
+                                    <span asp-validation-for="FeedBackModel.Comment" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-button group-sm text-center text-lg-left">
+                                    @Html.AntiForgeryToken()
+                                    <button class="button button-primary" type="submit">Отправить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"></script>

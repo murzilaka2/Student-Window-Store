@@ -1,0 +1,64 @@
+﻿@model Window
+@{
+    ViewBag.Title = "Редактирование " + @Model.Name;
+}
+<section class="section section-sm">
+    <div class="container">
+        <h3 class="text-center">Редактирование @Model.Name</h3>
+        <div class="row justify-content-md-center">
+            <div class="col-md-9 col-lg-7 col-xl-7">
+                <form asp-action="EditProduct" method="post" class="rd-form rd-form-centered">
+
+                    <input type="hidden" value="@Model.Id" name="Window.Id" />
+                    
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-name">Введите имя</label>
+                        <input class="form-input form-control-last-child" id="contact-name" type="text" name="Window.Name" value="@Model.Name" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <select class="form-input form-control-last-child" name="Window.Category.Id">
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                if (item.CategoryName.Equals(Model.Category.CategoryName))
+                                {
+                                    <option value="@item.Id" selected>@item.CategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.CategoryName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-shortdesc">Введите короткое описание</label>
+                        <textarea class="form-input form-control-last-child" id="contact-shortdesc" type="text" name="Window.ShortDescription" required>@Model.ShortDescription</textarea>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-longdesc">Введите полное описание</label>
+                        <textarea class="form-input form-control-last-child" id="contact-longdesc" type="text" name="Window.LongDescription" required>@Model.LongDescription</textarea>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-price">Введите стоимость</label>
+                        <input class="form-input form-control-last-child" id="contact-price" type="text" name="Window.Price" min="0" step="any" value="@Model.Price" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-image">Введите адрес изображения</label>
+                        <input class="form-input form-control-last-child" id="contact-image" type="text" name="Window.Image" value="@Model.Image" required>
+                    </div>
+
+
+                    <input class="button button-block button-primary" type="submit" value="Изменить" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/js/core.min.js"></script>
+<script src="~/js/script.js"></script>

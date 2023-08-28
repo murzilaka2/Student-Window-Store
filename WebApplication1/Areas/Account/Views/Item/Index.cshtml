@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Управление материалом";
+}
+@await Html.PartialAsync("../FeedBack/PartialsMaterial/_Menu", "Управление материалом")
+
+<section class="section section-sm bg-gray-100" style="padding: 0px;">
+    <div class="container">
+        <div class="row row-50">
+            <div class="col-md-6 col-lg-4">
+                <div class="product-classic">
+                    <div class="product-classic-figure">
+                        <img src="../images/home-1-360x270.jpg" alt="" width="270" height="210">
+                    </div>
+                    <h5 class="product-classic-title">Категории</h5>
+                    <p class="product-classic-text">Добавьте новые категории, удалите не нужные или измените текущие.</p>
+                    <a class="button button-sm button-primary" href="Item/AllCategories">Просмотр категорий</a>
+                    <a class="button button-sm button-primary" href="Item/AddCategory" data-ajax-update="#updateDiv" data-ajax="true">Добавить категорию</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="product-classic">
+                    <div class="product-classic-figure">
+                        <img src="../images/home-2-360x270.jpg" alt="" width="270" height="210">
+                    </div>
+                    <h5 class="product-classic-title">Товары</h5>
+                    <p class="product-classic-text">Добавьте новые товары, удалите не нужные или измените текущие.</p>
+                    <a class="button button-sm button-primary" href="Item/AllItems" >Просмотр товаров</a>
+                    <a class="button button-sm button-primary" href="Item/AddProduct" data-ajax-update="#updateDiv" data-ajax="true">Добавить товар</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="product-classic">
+                    <div class="product-classic-figure">
+                        <img src="../images/home-3-360x270.jpg" alt="" width="270" height="210">
+                    </div>
+                    <h5 class="product-classic-title">Дополнительные настройки</h5>
+                    <p class="product-classic-text">Выполните необходимую настройку сайта или личного аккаунта</p>
+                    <a class="button button-sm button-primary" href="/account/settings">Настройки аккаунта</a>
+                    <a class="button button-sm button-primary" href="/account/settings/sitesettings">Настройки сайта</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="updateDiv"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>

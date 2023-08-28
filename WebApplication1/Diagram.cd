@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebApplication1.Data.Models.User">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAACAAAAAAEAAAAAQgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.Window">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAAAQgAAgAEAAAAAARCAAAAABAAAAAAAAAACAA=</HashCode>
+      <FileName>Data\Models\Window.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.ShopWindowItem">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAQAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Data\Models\ShopWindowItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Window" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.ShopCart">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAABAAAAAAAQQAAAAAEAAQAAAAAIAAAAAAAAAACA=</HashCode>
+      <FileName>Data\Models\ShopCart.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ShopWindowItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.SendMessage">
+    <Position X="1.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Data\Models\SendMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.OrderDetail">
+    <Position X="8.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Data\Models\OrderDetail.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Order" />
+      <Property Name="Window" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.Order">
+    <Position X="12.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAAAACACAAAAABAAAAQAAAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Data\Models\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.Invitation">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAAAAAAAAAAAQAgAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\Invitation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.Category">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAEAAAAAAAAACAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\Category.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Windows" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.CartInfo">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\CartInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="shopCart" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WebApplication1.Data.Models.Booked">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\Booked.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Data.Models.SiteSettings">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAgEAAAAAAIAAAAAAAAAAgAIAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\SiteSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="WebApplication1.Data.Models.Role">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WebApplication1.Data.Models.OrderStatus">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgACAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\Order.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

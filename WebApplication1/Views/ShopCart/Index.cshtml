@@ -1,0 +1,48 @@
+﻿@model ShopCartViewModel
+@{
+    ViewBag.Title = "Корзина";
+}
+
+
+<section class="section section-sm bg-gray-100">
+    <div class="container">
+
+
+        @foreach (var item in Model.ShopCart.ShopWindowItems)
+        {
+            <div class="row row-30 align-items-lg-center text-center text-lg-left" style="margin-bottom: 70px;">
+                <div class="col-lg-4">
+                    <img class="image-bottom-margin" src="@item.Window.Image" alt="@item.Window.Name" style="margin-bottom: 10px;height: 250px;width: 250px;">
+                </div>
+                <div class="col-lg-7">
+                    <h3> @item.Window.Name</h3>
+                    <h6>Производитель: @item.Window.Category.CategoryName</h6>
+                    <h6>Стоимость: @item.Window.Price₴.</h6>
+                    <a class="button button-secondary" asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-Id="@item.Id">Убрать из корзины</a>
+                </div>
+            </div>
+            <hr />
+        }
+        <hr />
+
+        <div class="col-lg-10 col-xl-8">
+            <blockquote class="blockqoute-classic">
+                <h4>Общая сумма: @Model.TotalPrice</h4>
+            </blockquote>
+        </div>
+
+        <hr />
+
+        <div class="other-posts-block group-sm d-flex justify-content-between mt-0">
+            <a class="button button-primary button-icon button-icon-left" href="/Windows/Index">
+                Назад
+            </a>
+
+            <a class="button button-primary button-icon button-icon-right" asp-controller="Order" asp-action="Checkout">
+                Оформить заказ
+            </a>
+        </div>
+
+
+    </div>
+</section>

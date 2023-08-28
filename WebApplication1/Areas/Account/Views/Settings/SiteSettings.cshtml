@@ -1,0 +1,102 @@
+﻿@await Html.PartialAsync("../Item/PartialsMaterial/_Menu", "Настройки сайта")
+@model FooterViewModel
+@inject ISiteSettings siteSettings;
+
+<section class="section section-md bg-default">
+    <div class="container-fluid grid-demo grid-demo-bordered">
+        <div class="row">
+            <div class="col-12">
+                <h6>E-mail для отправки почты</h6>
+                @{
+                    var postForm = siteSettings.GetPostEmail();
+                }
+                <form asp-action="ChangeFormEmail" method="post" class="rd-form rd-form-centered">
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-email">Введите E-mail</label>
+                        <input class="form-input form-control-last-child" id="contact-email" type="email" name="formEmail" value="@postForm.FormEmail" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-password">Введите пароль</label>
+                        <input class="form-input form-control-last-child" id="contact-password" type="password" name="formPassword" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-name">Введите имя отправителя</label>
+                        <input class="form-input form-control-last-child" id="contact-name" type="text" name="formName" value="@postForm.FormSenderName" required>
+                    </div>
+
+                    <input class="button button-block button-primary" type="submit" value="Сохранить" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h6>Название сайта</h6>
+                <form asp-action="ChangeSiteName" method="post" class="rd-form rd-form-centered">
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-site-name">Введите название</label>
+                        <input class="form-input form-control-last-child" id="contact-site-name" type="text" name="siteName" value="@siteSettings.SiteName" required>
+                    </div>
+
+                    <input class="button button-block button-primary" type="submit" value="Сохранить" />
+                </form>
+
+            </div>
+            <div class="col-6">
+                <h6>Количество товара на странице</h6>
+                <form asp-action="ChangeProductCount" method="post" class="rd-form rd-form-centered">
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-page-count">Введите количество</label>
+                        <input class="form-input form-control-last-child" id="contact-page-count" type="text" name="productCount" value="@siteSettings.ProductCount" required>
+                    </div>
+
+                    <input class="button button-block button-primary" type="submit" value="Сохранить" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <h6>Подвал сайта</h6>
+                <form method="post" class="rd-form rd-form-centered">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-wrap">
+                        <label asp-for="PhoneNumber" class="form-label rd-input-label"></label>
+                        <input asp-for="PhoneNumber" class="form-input form-control-last-child" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="WorkTime" class="form-label rd-input-label"></label>
+                        <input asp-for="WorkTime" class="form-input form-control-last-child" />
+                        <span asp-validation-for="WorkTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Address" class="form-label rd-input-label"></label>
+                        <input asp-for="Address" class="form-input form-control-last-child" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                       <label asp-for="Email" class="form-label rd-input-label"></label>
+                        <input asp-for="Email" class="form-input form-control-last-child" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <input class="button button-block button-primary" type="submit" value="Сохранить" />
+                </form>
+            </div>
+            <div class="col-4">
+                <h6>Логотип сайта</h6>
+                <form asp-action="ChangeSiteLogo" method="post" class="rd-form rd-form-centered">
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-site-logo">Укажите ссылку на изображение</label>
+                        <input class="form-input form-control-last-child" id="contact-site-logo" type="text" name="siteLogo" value="@siteSettings.SiteLogo" required>
+                    </div>
+                    <input class="button button-block button-primary" type="submit" value="Сохранить" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"></script>

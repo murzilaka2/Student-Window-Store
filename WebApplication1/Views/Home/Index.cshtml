@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Windows Store";
+}
+
+@model WindowsListViewModel
+@await Html.PartialAsync("_CallUsToday")
+<hr/>
+<br />
+
+<h3>@Model.CurrentCategory</h3>
+<div class="row row-30 gutters-20">
+    @{
+        @*Перебираем данные в подключенной модели*@
+        @*Обязательно указываем явны тип данных в цикле*@
+        foreach (Window window in Model.AllWindows)
+        {
+            @await Html.PartialAsync("_Windows", window)
+        }
+    }
+</div>

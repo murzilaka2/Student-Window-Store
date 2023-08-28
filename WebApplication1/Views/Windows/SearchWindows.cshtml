@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Window>
+@{
+    ViewBag.Title = "Поиск окон";
+}
+<h3>Результат поиска:</h3>
+<div class="row row-30 gutters-20">
+    @{
+        @if(Model.Count() == 0)
+        {
+            <h5>Ничего не найдено!</h5>
+        }
+        else
+        {
+        @*Перебираем данные в подключенной модели*@
+        @*Обязательно указываем явны тип данных в цикле*@
+        foreach (Window window in Model)
+        {
+            @await Html.PartialAsync("_Windows", window)
+        }
+        }
+    }
+</div>

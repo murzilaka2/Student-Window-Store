@@ -1,0 +1,56 @@
+﻿@model RegisterViewModel
+
+<section class="section section-md bg-default text-center">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-9 col-lg-7 col-xl-5">
+                @{
+                    if (Model.ConfirmMessage != null)
+                    {
+                        <section class="section section-sm bg-gray-100">
+                            <div class="container">
+                                <h4 class="text-center">@Model.ConfirmMessage</h4>
+                            </div>
+                        </section>
+                    }
+                    else
+                    {
+                        <h3>Регистрация</h3>
+                    }
+                }
+                <form asp-action="Register" class="rd-form rd-form-centered">
+                    <input type="hidden" asp-for="Code" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-wrap">
+                        <label asp-for="Email" class="form-label rd-input-label"></label>
+                        <input asp-for="Email" class="form-input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Name" class="form-label rd-input-label"></label>
+                        <input asp-for="Name" class="form-input" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Password" class="form-label rd-input-label"></label>
+                        <input asp-for="Password" class="form-input" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="PasswordConfirm" class="form-label rd-input-label"></label>
+                        <input asp-for="PasswordConfirm" class="form-input" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Регистрация" class="button button-block button-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"></script>

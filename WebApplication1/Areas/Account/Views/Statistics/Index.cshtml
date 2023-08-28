@@ -1,0 +1,81 @@
+﻿@model StatisticsViewModel
+@{
+    ViewBag.Title = "Статистика продаж";
+}
+@await Html.PartialAsync("PartialsMaterial/_Menu", "Статистика продаж")
+
+<section class="section section-sm bg-gray-100" style="padding: 0px;">
+    <div class="container">     
+        <div class="row">
+            <div class="col-xl-11">
+                <!--Bootstrap tabs-->
+                <div class="tabs-custom tabs-vertical tabs-corporate" id="tabs-2">
+                    <!--Nav tabs-->
+                    @*<li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-2-1" data-toggle="tab">Tab 1</a></li>*@
+                    <ul class="nav nav-tabs">
+                        @foreach (var item in @Model.CategoryStatistics)
+                        {
+                            <li class="nav-item" onclick="getPaging(@item.Category.Id)" role="presentation">
+                                <a asp-action="GetStatisticTable" asp-controller="Statistics" asp-route-id="@item.Category.Id"
+                               class="nav-link" data-ajax-update="#updateDiv" data-ajax="true">@item.Category.CategoryName</a>
+                            </li>
+                        }
+                    </ul>
+                    <script>
+                        function getPaging(str) {
+                            var tabs = document.getElementsByClassName('tab-pane fade active show');
+                            for (var i = 0; i < tabs.length; ++i) {
+                                var item = tabs[i];
+                                item.className = 'tab-pane fade'
+                            }
+                           var msg = document.getElementById("tabs-2-"+str);
+                           msg.className += ' active show'
+                        }
+                    </script>
+                    <!--Tab panes-->
+                    <div class="tab-content" style="overflow-y: scroll; height: 200px;">
+                        @{
+                            bool flag = true;
+                        }
+                        @foreach (var item in @Model.CategoryStatistics)
+                        {
+                            <div class="tab-pane fade" id="tabs-2-@item.Category.Id">
+                                @if (item.Windows.Count > 0)
+                                {
+                                    <ul>
+                                        @foreach (var window in item.Windows)
+                                        {
+                                            <li>@window.Name | @window.Price</li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <p>Нет данных</p>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div id="updateDiv">@await Html.PartialAsync("PartialsMaterial/_StatisticTable", Model.OrderDetailsViewModel)</div>
+    </div>
+</section>
+
+<script>
+    var tabs = document.getElementsByClassName('tab-pane fade');
+    tabs[0].className = 'tab-pane fade active show'
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+

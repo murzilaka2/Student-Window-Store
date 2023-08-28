@@ -1,0 +1,67 @@
+﻿@model BookingViewModel
+@{
+    ViewBag.Title = "Записаться";
+}
+<section class="section section-sm" style="background-color:white">
+    <div class="container">
+        <div id="updateDiv">
+        </div>
+        <div class="rd-calendar fullwidth-calendar">
+            <div class="rdc-panel">
+                <form asp-controller="Book" asp-action="Booking">
+                    <input type="hidden" name="CurrentMonth" value="@Model.CurrentMonth" />
+                    <input type="hidden" name="Subtrahend" value="-1" />
+                    <button class="rdc-prev" type="submit"></button>
+                </form>
+                <div class="rdc-panel-inner">
+                    <div class="rdc-month">@Model.CurrentMonth.ToString("MMMM")</div>
+                    <div class="rdc-fullyear">@Model.CurrentMonth.Year</div>
+                </div>
+                <form asp-controller="Book" asp-action="Booking">
+                    <input type="hidden" name="CurrentMonth" value="@Model.CurrentMonth" />
+                    <input type="hidden" name="Subtrahend" value="1" />
+                    <button class="rdc-next" type="submit"></button>
+                </form>
+            </div>
+            <div>
+                <div class="rdc-table-inner">
+                    <div class="rdc-table-header">
+                        <div class="rdc-table_day">S</div>
+                        <div class="rdc-table_day">M</div>
+                        <div class="rdc-table_day">T</div>
+                        <div class="rdc-table_day">W</div>
+                        <div class="rdc-table_day">T</div>
+                        <div class="rdc-table_day">F</div>
+                        <div class="rdc-table_day">S</div>
+                    </div>
+                    @{
+                        int count = 0;
+                        int currentDay = 1;
+                        int totalDays = Model.TotalDays;
+                    }
+                    @while (count < totalDays)
+                    {
+                        <div class="rdc-table-row">
+                            @for (int i = currentDay; i < currentDay + 7; i++)
+                            {
+                                if (count >= totalDays) { break; }
+                                count++;
+                                <div class="rdc-table_date-outer">
+                                    <div class="rdc-table_date rdc-table_prev">
+                                        <a asp-controller="Book" asp-action="GetBooked" asp-route-day="@i" asp-route-currentMonth="@Model.CurrentMonth" asp-route-currentMonthNumber = "@Model.CurrentMonth.Month" data-ajax-update="#updateDiv" data-ajax="true">@i</a>
+                                    </div>
+                                </div>
+                            }
+                            @{
+                                currentDay += 7;
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>

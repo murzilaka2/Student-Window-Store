@@ -1,0 +1,36 @@
+﻿@model LoginViewModel
+
+<section class="section section-md bg-default text-center">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-9 col-lg-7 col-xl-5">
+                <h3>Авторизация</h3>
+                <div class="group-sm group-custom"><a class="button button-facebook button-icon button-icon-left button-round" href="forms.html#"><span class="icon fa fa-facebook"></span>Facebook</a><a class="button button-twitter button-icon button-icon-left button-round" href="forms.html#"><span class="icon fa fa-twitter"></span>Twitter</a><a class="button button-google button-icon button-icon-left button-round" href="forms.html#"><span class="icon fa fa-google-plus"></span>Google+</a></div>
+                <div class="text-decoration-lines"><span class="text-decoration-lines-content">или</span></div>
+
+                <form asp-action="Login" class="rd-form rd-form-centered">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-wrap">
+                        <label asp-for="Email" class="form-label rd-input-label"></label>
+                        <input asp-for="Email" class="form-input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-wrap">
+                        <label asp-for="Password" class="form-label rd-input-label"></label>
+                        <input asp-for="Password" class="form-input" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                     @Html.AntiForgeryToken()
+                    <input type="submit" value="Вход" class="button button-block button-primary" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,20 @@
+﻿@model BookingPersonViewModel
+
+<p>Запись на следующую дату: @Model.DateTime.ToLongDateString()</p>
+
+<form asp-controller="Book" asp-action="GetBooked" data-ajax-update="#updateDiv" data-ajax="true" class="rd-form rd-form-centered">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+     <input asp-for="DateTime" type="hidden" class="form-input" />
+    <div class="form-wrap">
+        <label asp-for="Name" class="form-label rd-input-label"></label>
+        <input asp-for="Name" class="form-input" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-wrap">
+        <label asp-for="Phone" class="form-label rd-input-label"></label>
+        <input asp-for="Phone" class="form-input" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Записаться" class="button button-block button-primary" />
+</form>

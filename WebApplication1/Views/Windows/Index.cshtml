@@ -1,0 +1,57 @@
+﻿@using WebApplication1.Data.Models
+@*Получение объекта, который передается на страницу через представление*@
+@*За счет подключения, теперь мы можем использовать коллекцию, которую передали, на основ класса Window*@
+@model WindowsListViewModel
+@{
+    ViewBag.Title = "Все окна";
+}
+
+<div class="row justify-content-center">
+    <div class="col-xl-10">
+        <div class="tabs-custom tabs-horizontal tabs-corporate" style="text-align: center !important;">
+            <ul>
+                <li class="nav-item"><a class="nav-link" href="/Windows/Index/">Все</a></li>
+                @{
+                    foreach (Category item in Model.AllCategories)
+                    {
+                        @await Html.PartialAsync("_Categories", item)
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<br />
+<h3>@Model.CurrentCategory</h3>
+<div class="row row-30 gutters-20">
+    @{
+        @*Перебираем данные в подключенной модели*@
+        @*Обязательно указываем явны тип данных в цикле*@
+        foreach (Window window in Model.AllWindows)
+        {
+            @await Html.PartialAsync("_Windows", window)
+        }
+    }
+</div>
+
+@if (Model.PageViewModel.HasPreviousPage)
+    {
+    <a asp-action="Index"
+    asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+    class="btn btn-outline-dark">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Назад
+    </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+    <a asp-action="Index"
+    asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+    class="btn btn-outline-dark">
+    Вперед
+    <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+    }

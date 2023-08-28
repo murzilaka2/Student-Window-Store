@@ -1,0 +1,99 @@
+﻿@model SendMessage
+@inject ISiteSettings siteSettings;
+@{
+    ViewBag.Title = "Контакты";
+}
+ @{
+        var footer = siteSettings.GetFooter();
+        if (footer == null)
+        {
+            footer = new FooterViewModel { Address = "...", Email = "...", PhoneNumber = "+3800000000000", WorkTime = "00:00" };
+        }
+        (string phone, string workTime, string address, string email) = footer;
+    }
+
+
+<section class="section section-sm bg-default">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-sm-6 col-lg-4">
+              <div class="box-icon-creative box-icon-creative-horizontal">
+                <div class="icon nc-icon-outline ui-3_phone"></div>
+                <div class="box-icon-creative-body">
+                  <h6 class="box-icon-creative-title">Номер телефона:</h6>
+                  <p class="box-icon-creative-text"><a href="tel:"PhoneNumber">@footer.PhoneNumber</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="box-icon-creative box-icon-creative-horizontal">
+                <div class="icon nc-icon-outline location_pin"></div>
+                <div class="box-icon-creative-body">
+                  <h6 class="box-icon-creative-title">Адрес:</h6>
+                  <p class="box-icon-creative-text"><a href="https://www.google.com/maps/place/@footer.Address">@footer.Address</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="box-icon-creative box-icon-creative-horizontal">
+                <div class="icon nc-icon-outline ui-1_email-84"></div>
+                <div class="box-icon-creative-body">
+                  <h6 class="box-icon-creative-title">E-mail:</h6>
+                  <p class="box-icon-creative-text"><a href="mailto:@footer.Email">@footer.Email</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-md bg-default">
+        <div class="container">
+
+          <form class="rd-form rd-form-centered" method="post">
+            <div class="row row-20 gutters-20">
+              <div class="col-md-6">
+
+                <div class="form-wrap">
+                    <label asp-for="Name" class="form-label rd-input-label"></label>
+                    <input asp-for="Name" class="form-input" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                 <div class="form-wrap">
+                    <label asp-for="Email" class="form-label rd-input-label"></label>
+                    <input asp-for="Email" class="form-input" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-wrap">
+                    <label asp-for="Phone" class="form-label rd-input-label"></label>
+                    <input asp-for="Phone" class="form-input" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+                
+                   <div class="form-wrap">
+                    <label asp-for="Message" class="form-label rd-input-label"></label>
+                    <textarea asp-for="Message" class="form-input"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+
+              </div>
+              <div class="col-12">
+                <div class="text-center text-md-right">
+                  <button class="button button-primary" type="submit">Отправить сообщение</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>

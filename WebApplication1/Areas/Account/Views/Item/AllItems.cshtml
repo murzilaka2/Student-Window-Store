@@ -1,0 +1,76 @@
+﻿@model WindowsListViewModel
+@{
+    ViewBag.Title = "Все товары";
+}
+@await Html.PartialAsync("PartialsMaterial/_Menu", "Все товары")
+
+<div class="rd-navbar-search toggle-original-elements active" style="width: 100%;">
+    <button class="rd-navbar-search-toggle rd-navbar-fixed-element-2 toggle-original active" data-rd-navbar-toggle=".rd-navbar-search"><span></span></button>
+    <form class="rd-search" action="AllItems" data-search-live="rd-search-results-live" method="GET" style="width: 100%;">
+        <div class="form-wrap">
+            <label class="form-label rd-input-label" for="for-product">Поиск по названию модели:</label>
+            <input class="rd-navbar-search-form-input form-input" id="for-product" type="text" name="itemName" autocomplete="off">
+            <div class="rd-search-results-live" id="rd-search-results-live"></div>
+        </div>
+        <button class="rd-search-form-submit fa-search" type="submit"></button>
+    </form>
+</div>
+
+<section class="section section-sm bg-gray-100" style="padding: 0px;">
+    <div class="container">
+        <div class="table-custom-responsive">
+            <table class="table-custom table-custom-secondary" id="myTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)" style="color: red; cursor: pointer;">Id</th>
+                        <th onclick="sortTable(1)" style="color: red; cursor: pointer;">Название</th>
+                        <th onclick="sortTable(2)" style="color: red; cursor: pointer;">Категория</th>
+                        <th>Короткое Описание</th>
+                        <th onclick="sortTable(4)" style="color: red; cursor: pointer;">Стоимость</th>
+                        <th>Изображение</th>
+                        <th>Редактирование</th>
+                        <th>Удаление</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.AllWindows)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td>@item.ShortDescription</td>
+                            <td>@item.Price</td>
+                            <td><img src="@item.Image" /></td>
+                            <td><div class="button button-primary button-circle" onclick="location.href='/account/Item/EditProduct/@item.Id';">Изменить</div></td>
+                            <td><div class="button button-primary button-circle" onclick="location.href='/account/Item/DeleteProduct/@item.Id';">Удалить</div></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="AllItems"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Назад
+            </a>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="AllItems"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+                Вперед
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+
+    </div>
+</section>
+
+<script src="~/js/sortscript.js"></script>

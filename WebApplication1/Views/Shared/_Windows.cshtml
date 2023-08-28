@@ -1,0 +1,18 @@
+﻿@model Window
+
+<div class="col-md-6 col-lg-4">
+    <div class="pricing-classic">
+        <div class="pricing-classic-top">
+            <h4 class="pricing-classic-title">@Model.Name</h4>
+            <a href="/Windows/WindowView/@Model.Id">
+                <p><img src="@Model.Image" class="img-thumbnail" style="height: 300px;width: 300px;" /></p>
+            </a>
+        </div>
+        <div class="pricing-classic-body">
+            <p>Производитель: @Model.Category</p>
+            <p>Количество: @Model.Available</p>
+            <p>Стоимость: @Model.Price.ToString()₴</p>
+            <a class="button button-secondary button-block" href="/ShopCart/AddToCart/@Model.Id">Добавить в корзину</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model OrderDetailsViewModel
+
+<table class="table-custom table-custom-striped table-custom-primary">
+    <thead>
+        <tr>
+            <th>Фио покупателя</th>
+            <th>Номер телефона</th>
+            <th>Дата заказа</th>
+            <th>Наименование</th>
+            <th>Стоимость</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is not null)
+        {
+            @foreach (var item in Model.OrderDetails)
+            {
+                 <tr>
+                    <td>@item.Order.Name</td>
+                    <td>@item.Order.Phone</td>
+                    <td>@item.Order.OrderDate</td>
+                    <td>@item.Window.Name</td>
+                    <td>@item.Window.Price</td>
+                </tr>                
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Общая сумма</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>@Model.TotalSum</td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,20 @@
+﻿@model string
+
+<section class="breadcrumbs-custom bg-image" style="background-image: url(../images/breadcrumbs-bg.png);"
+         data-preset="{&quot;title&quot;:&quot;Breadcrumbs&quot;,&quot;category&quot;:&quot;header&quot;,&quot;reload&quot;:false,&quot;id&quot;:&quot;breadcrumbs&quot;}">
+    <div class="container">
+        <div class="row row-20 align-items-center">
+            <div class="col-sm-6">
+                <h5 class="breadcrumbs-custom-title">@Model</h5>
+            </div>
+            <div class="col-sm-6 text-sm-right">
+                <ul class="breadcrumbs-custom-path">
+                    <li>Маршрут:</li>
+                    <li><a href="/Account/Home">Главная панель</a></li>
+                    <li><a href="/Account/Suppliers">Поставщики</a></li>
+                    <li class="active">@Model</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

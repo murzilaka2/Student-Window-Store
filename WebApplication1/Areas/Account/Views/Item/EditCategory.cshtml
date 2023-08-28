@@ -1,0 +1,30 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Редактирование " + @Model.CategoryName;
+}
+<section class="section section-sm">
+    <div class="container">
+        <h3 class="text-center">Редактирование @Model.CategoryName</h3>
+        <div class="row justify-content-md-center">
+            <div class="col-md-9 col-lg-7 col-xl-7">
+                <form asp-action="EditCategory" method="post" class="rd-form rd-form-centered">
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-name">Введите имя</label>
+                        <input class="form-input form-control-last-child" id="contact-name" type="text" name="CategoryName" value="@Model.CategoryName" required>
+                    </div>
+
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-shortdesc">Введите описание</label>
+                        <textarea class="form-input form-control-last-child" id="contact-shortdesc" type="text" name="Descroption" required>@Model.Descroption</textarea>
+                    </div>
+
+                    <input class="button button-block button-primary" type="submit" value="Изменить" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/js/core.min.js"></script>
+<script src="~/js/script.js"></script>

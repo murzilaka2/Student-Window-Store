@@ -1,0 +1,71 @@
+﻿@model FeedBackViewModel
+@{
+    ViewBag.Title = "Отзывы";
+}
+@await Html.PartialAsync("PartialsMaterial/_Menu", "Отзывы")
+
+<section class="section section-sm bg-gray-100" style="padding: 0px;">
+    <div class="container">
+        <div class="table-custom-responsive">
+            <table class="table-custom table-custom-secondary" id="myTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)" style="color: red; cursor: pointer;">Имя</th>
+                        <th onclick="sortTable(1)" style="color: red; cursor: pointer;">Email адрес</th>
+                        <th onclick="sortTable(2)" style="color: red; cursor: pointer;">Комментарий</th>
+                        <th>Одобрить</th>
+                        <th>Удалить</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FeedBacks)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.Comment</td>
+                            <td>
+                                @if (!@item.IsAccepted)
+                                {
+                                    <div class="button button-primary button-circle" onclick="location.href='/account/FeedBack/Accept/@item.Id';">Одобрить</div>
+                                }                              
+                            </td>
+                            <td><div class="button button-primary button-circle" onclick="location.href='/account/FeedBack/Delete/@item.Id';">Удалить</div></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Общее количество отзывов</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@Model.Count</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Назад
+            </a>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+                Вперед
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+
+    </div>
+</section>
+
+<script src="~/js/sortscript.js"></script>

@@ -1,0 +1,26 @@
+﻿@model Supplier
+@await Html.PartialAsync("PartialsMaterial/_MenuInner", @Model.Name)
+@{
+    ViewBag.Title = @Model.Name;
+}
+<section class="section section-sm">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-lg-6">
+              <h3>@Model.Name</h3>
+              <p>@Model.Description</p>
+              <ul class="list-marked">
+                <li>@Model.Phone</li>
+                <li>@Model.Email</li>
+                <li>@Model.Address</li>
+              </ul>
+            </div>
+            <div class="col-lg-6 text-center">
+                @if(Model.Image != null)
+                {
+                    <img src="@Model.Image" alt="@Model.Name" width="560" height="373">
+                }
+            </div>
+          </div>
+        </div>
+      </section>

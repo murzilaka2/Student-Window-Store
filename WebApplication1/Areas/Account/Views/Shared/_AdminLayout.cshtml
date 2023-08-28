@@ -1,0 +1,176 @@
+﻿@inject ICartService cartService;
+@inject ISiteSettings siteSettings;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @*Загловок для страницы, который мы можем передать через такой же ViewBag*@
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7CRoboto:400&amp;display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="page">
+        <header class="section page-header">
+            <!--RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                    <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                    <div class="rd-navbar-aside-outer rd-navbar-collapse">
+                        <div class="rd-navbar-aside">
+                            <div class="rd-navbar-brand">
+                                <!--Brand--><a class="brand" href="index.html"><img class="brand-logo-dark" src="@siteSettings.SiteLogo" alt="@siteSettings.SiteName" width="145" height="28" /><img class="brand-logo-light" src="../images/logo-default-290x57.png" alt="" width="145" height="28" /></a>
+                                <p class="small">Панель администратора. </p>
+                            </div>
+                            <ul class="list-marked list-marked-with-icon rd-navbar-list-info"></ul>
+                            @{
+                                var user = User.Identity;
+                                if (user is not null && user.IsAuthenticated)
+                                {
+                                    <a class="button button-primary button-icon button-icon-left" href="/Auth/LogOut"><span class="icon nc-icon-mini arrows-1_log-out"></span>Выход</a>
+                                }
+                                else
+                                {
+                                    <a class="button button-primary button-icon button-icon-left" href="/Auth/Login"><span class="icon nc-icon-mini objects_key-26"></span>Авторизация</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="rd-navbar-main-outer">
+                        <div class="rd-navbar-main">
+                            <!--RD Navbar Panel-->
+                            <div class="rd-navbar-panel">
+                                <!--RD Navbar Toggle-->
+                                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            </div>
+                            <div class="rd-navbar-main-element">
+                                <div class="rd-navbar-nav-wrap">
+                                    <!--RD Navbar Brand-->
+                                    <div class="rd-navbar-brand">
+                                        <!--Brand--><a class="brand" href="index.html"><img class="brand-logo-dark" src="../images/logo-default-290x57.png" alt="" width="145" height="28" /><img class="brand-logo-light" src="images/logo-default-290x57.png" alt="" width="145" height="28" /></a>
+                                    </div>
+                                    <ul class="rd-navbar-nav">
+                                        <!--<li class="rd-nav-item active">!-->
+                                        <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/">На сайт</a>
+                                        </li>
+                                        <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/Home">Главная панель</a>
+                                        </li>
+                                        <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/Item">Управление материалом</a>
+                                        </li>
+                                         <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/book">Онлайн заявки</a>
+                                        </li>
+                                        <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/statistics">Статистика продаж</a>
+                                        </li>
+                                        <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/feedback">Отзывы</a>
+                                        </li>
+                                         <li class="rd-nav-item">
+                                            <a class="rd-nav-link" href="/account/suppliers">Поставщики</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="rd-navbar-right">
+                                    <!--RD Navbar Search-->
+                                    <div class="rd-navbar-search">
+                                        <button class="rd-navbar-search-toggle rd-navbar-fixed-element-2" data-rd-navbar-toggle=".rd-navbar-search"><span></span></button>
+                                        <form class="rd-search" action="/Home/SearchWindows" data-search-live="rd-search-results-live" method="GET">
+                                            <div class="form-wrap">
+                                                <label class="form-label" for="rd-navbar-search-form-input">Поиск по модели:</label>
+                                                <input class="rd-navbar-search-form-input form-input" id="rd-navbar-search-form-input" type="text" name="value" autocomplete="off">
+                                                <div class="rd-search-results-live" id="rd-search-results-live"></div>
+                                            </div>
+                                            <button class="rd-search-form-submit fa-search" type="submit"></button>
+                                        </form>
+                                    </div>
+                                    <div class="rd-navbar-cart">
+                                        <a class="nc-icon-mini shopping_cart-modern" href="/ShopCart">
+                                            <span style="font-family:'Montserrat', sans-serif; font-weight: 500;">@cartService.ItemsCount</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+        <section class="section bg-gray-100 section-sm">
+            <div class="container">
+
+
+                @*Это место, куда встраиваются различные блоки*@
+                @RenderBody()
+
+            </div>
+        </section>
+        <!-- Подвал Начало!-->
+        <footer class="section footer-classic">
+            <div class="footer-classic-body">
+                <div class="container">
+                    <div class="row row-30">
+                        <div class="col-sm-6 col-lg-4">
+                            <h5 class="footer-title">Get Your Quote</h5>
+                            <p>Get a quote today to receive high-quality windows that fit your home or office the best way!</p><a class="button button-secondary" href="booking.html">Request a Quote</a>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <h5 class="footer-title">Services</h5>
+                            <ul class="list-marked">
+                                <li><a href="index.html#">Window &amp; Door Measuring</a></li>
+                                <li><a href="index.html#">Window Installation</a></li>
+                                <li><a href="index.html#">Window Replacement</a></li>
+                                <li><a href="index.html#">Door Installation</a></li>
+                                <li><a href="index.html#">Door &amp; Window Maintenance</a></li>
+                                <li><a href="index.html#">Repair Services</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <h5 class="footer-title">Contacts</h5>
+                            <ul class="list-marked list-marked-with-icon">
+                                <li> <span class="list-marked-icon nc-icon-mini ui-3_phone"> </span>Call us: <a href="tel:#">(719) 445-2808</a></li>
+                                <li> <span class="list-marked-icon nc-icon-mini ui-2_time-clock"></span>Mon-Fri: 10 AM - 7 PM; Sat-Sun: 10 AM - 3 PM</li>
+                                <li> <span class="list-marked-icon nc-icon-mini location_pin"></span><a href="index.html#">4578 Marmora Road, Glasgow </a></li>
+                                <li> <span class="list-marked-icon nc-icon-mini ui-1_email-83"></span><a href="mailto:#">info@demolink.org</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-classic-bottom">
+                <div class="container">
+                    <div class="row row-15 align-items-center">
+                        <div class="col-sm-6">
+                            <p class="rights"><span>©&nbsp; </span><span class="copyright-year">2022</span><span>&nbsp;</span><span>WinSpace</span><span>.&nbsp;</span><a href="privacy-policy.html">Privacy Policy</a></p>
+                        </div>
+                        <div class="col-sm-6 text-sm-right">
+                            <ul class="list-inline">
+                                <li><a class="nc-icon-mini social_logo-fb-simple" href="index.html#"></a></li>
+                                <li><a class="nc-icon-mini social_logo-twitter" href="index.html#"></a></li>
+                                <li><a class="nc-icon-mini social_logo-youtube" href="index.html#"></a></li>
+                                <li><a class="nc-icon-mini social_logo-instagram" href="index.html#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Подвал Конец!-->
+    </div>
+</body>
+<!-- JS Начало!-->
+<script src="~/js/core.min.js"></script>
+<script src="~/js/script.js"></script>
+<!-- JS Конец!-->
+</html>

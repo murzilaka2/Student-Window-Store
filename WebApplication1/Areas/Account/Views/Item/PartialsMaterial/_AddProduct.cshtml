@@ -1,0 +1,52 @@
+﻿@model ProductViewModel
+
+<section class="section section-sm">
+    <div class="container">
+        <h3 class="text-center">Добавление товара</h3>
+        <div class="row justify-content-md-left">
+            <div class="col-md-9 col-lg-7 col-xl-7">
+                <form asp-action="AddProduct" method="post" class="rd-form rd-form-centered">
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-name">Введите имя</label>
+                        <input class="form-input form-control-last-child" id="contact-name" type="text" name="Window.Name" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <select class="form-input form-control-last-child" name="Category.Id">
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <option value="@item.Id">@item.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-shortdesc">Введите короткое описание</label>
+                        <textarea class="form-input form-control-last-child" id="contact-shortdesc" type="text" name="Window.ShortDescription" required></textarea>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-longdesc">Введите полное описание</label>
+                        <textarea class="form-input form-control-last-child" id="contact-longdesc" type="text" name="Window.LongDescription" required></textarea>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-price">Введите стоимость</label>
+                        <input class="form-input form-control-last-child" id="contact-price" type="number" name="Window.Price" required>
+                    </div>
+
+                    <div class="form-wrap">
+                        <label class="form-label rd-input-label" for="contact-image">Введите адрес изображения</label>
+                        <input class="form-input form-control-last-child" id="contact-image" type="text" name="Window.Image" required>
+                    </div>
+
+
+                    <input class="button button-block button-primary" type="submit" value="Добавить" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/js/core.min.js"></script>
+<script src="~/js/script.js"></script>

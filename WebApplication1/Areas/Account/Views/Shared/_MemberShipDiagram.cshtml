@@ -1,0 +1,29 @@
+﻿@model MemberShipStatisticsViewModel
+<p>Общее количество приглашений: </p>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+var xValues = JSON.parse('@Json.Serialize(@Model.Months)');
+var yValues = JSON.parse('@Json.Serialize(@Model.Counts)');
+var barColors = ["red", "green", "blue", "orange", "#E564F1","#2A95A5"];
+
+new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+        }]
+    },
+    options: {
+        legend: { display: false },
+        title: {
+            display: true,
+            text: "Промежуток " + xValues.length + " месяца(ев)"
+        }
+    }
+});
+</script>
+
+
